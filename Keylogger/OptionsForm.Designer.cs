@@ -1,0 +1,215 @@
+namespace Klog
+{
+    partial class OptionsForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            if (_hook != null)
+            {
+                _hook.Stop(true, true, false);
+                _hook = null;
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
+            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cbKeybEnabled = new System.Windows.Forms.CheckBox();
+            this.bOpenLog = new System.Windows.Forms.Button();
+            this.bChangePassword = new System.Windows.Forms.Button();
+            this.tbPass1 = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbPass2 = new System.Windows.Forms.TextBox();
+            this.bDeleteLogs = new System.Windows.Forms.Button();
+            this.bExit = new System.Windows.Forms.Button();
+            this.cbMouseEnabled = new System.Windows.Forms.CheckBox();
+            this.groupBox1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // trayIcon
+            // 
+            this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
+            this.trayIcon.Text = "Klog";
+            this.trayIcon.Visible = true;
+            this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseDoubleClick);
+            // 
+            // cbKeybEnabled
+            // 
+            this.cbKeybEnabled.AutoSize = true;
+            this.cbKeybEnabled.Checked = true;
+            this.cbKeybEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbKeybEnabled.Location = new System.Drawing.Point(12, 51);
+            this.cbKeybEnabled.Name = "cbKeybEnabled";
+            this.cbKeybEnabled.Size = new System.Drawing.Size(154, 17);
+            this.cbKeybEnabled.TabIndex = 1;
+            this.cbKeybEnabled.Text = "Keyboard Logging Enabled";
+            this.cbKeybEnabled.UseVisualStyleBackColor = true;
+            // 
+            // bOpenLog
+            // 
+            this.bOpenLog.Location = new System.Drawing.Point(12, 107);
+            this.bOpenLog.Name = "bOpenLog";
+            this.bOpenLog.Size = new System.Drawing.Size(154, 25);
+            this.bOpenLog.TabIndex = 3;
+            this.bOpenLog.Text = "Open Log File";
+            this.bOpenLog.UseVisualStyleBackColor = true;
+            this.bOpenLog.Click += new System.EventHandler(this.bOpenLog_Click);
+            // 
+            // bChangePassword
+            // 
+            this.bChangePassword.Location = new System.Drawing.Point(113, 71);
+            this.bChangePassword.Name = "bChangePassword";
+            this.bChangePassword.Size = new System.Drawing.Size(72, 25);
+            this.bChangePassword.TabIndex = 2;
+            this.bChangePassword.Text = "Change";
+            this.bChangePassword.UseVisualStyleBackColor = true;
+            this.bChangePassword.Click += new System.EventHandler(this.bChangePassword_Click);
+            // 
+            // tbPass1
+            // 
+            this.tbPass1.Location = new System.Drawing.Point(57, 19);
+            this.tbPass1.Name = "tbPass1";
+            this.tbPass1.PasswordChar = '*';
+            this.tbPass1.Size = new System.Drawing.Size(128, 20);
+            this.tbPass1.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.tbPass2);
+            this.groupBox1.Controls.Add(this.tbPass1);
+            this.groupBox1.Controls.Add(this.bChangePassword);
+            this.groupBox1.Location = new System.Drawing.Point(172, 85);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(192, 103);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Change password";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Confirm:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "New:";
+            // 
+            // tbPass2
+            // 
+            this.tbPass2.Location = new System.Drawing.Point(57, 45);
+            this.tbPass2.Name = "tbPass2";
+            this.tbPass2.PasswordChar = '*';
+            this.tbPass2.Size = new System.Drawing.Size(128, 20);
+            this.tbPass2.TabIndex = 1;
+            // 
+            // bDeleteLogs
+            // 
+            this.bDeleteLogs.Location = new System.Drawing.Point(13, 164);
+            this.bDeleteLogs.Name = "bDeleteLogs";
+            this.bDeleteLogs.Size = new System.Drawing.Size(153, 24);
+            this.bDeleteLogs.TabIndex = 4;
+            this.bDeleteLogs.Text = "Delete All Logs";
+            this.bDeleteLogs.UseVisualStyleBackColor = true;
+            this.bDeleteLogs.Click += new System.EventHandler(this.bDeleteLogs_Click);
+            // 
+            // bExit
+            // 
+            this.bExit.Location = new System.Drawing.Point(12, 12);
+            this.bExit.Name = "bExit";
+            this.bExit.Size = new System.Drawing.Size(154, 33);
+            this.bExit.TabIndex = 0;
+            this.bExit.Text = "Exit";
+            this.bExit.UseVisualStyleBackColor = true;
+            this.bExit.Click += new System.EventHandler(this.bExit_Click);
+            // 
+            // cbMouseEnabled
+            // 
+            this.cbMouseEnabled.AutoSize = true;
+            this.cbMouseEnabled.Checked = true;
+            this.cbMouseEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbMouseEnabled.Location = new System.Drawing.Point(12, 74);
+            this.cbMouseEnabled.Name = "cbMouseEnabled";
+            this.cbMouseEnabled.Size = new System.Drawing.Size(141, 17);
+            this.cbMouseEnabled.TabIndex = 2;
+            this.cbMouseEnabled.Text = "Mouse Logging Enabled";
+            this.cbMouseEnabled.UseVisualStyleBackColor = true;
+            // 
+            // OptionsForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(375, 200);
+            this.Controls.Add(this.bExit);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.bDeleteLogs);
+            this.Controls.Add(this.bOpenLog);
+            this.Controls.Add(this.cbMouseEnabled);
+            this.Controls.Add(this.cbKeybEnabled);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "OptionsForm";
+            this.ShowInTaskbar = false;
+            this.Text = "Klog Control Panel";
+            this.Deactivate += new System.EventHandler(this.OptionsForm_Deactivate);
+            this.Activated += new System.EventHandler(this.OptionsForm_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.NotifyIcon trayIcon;
+        private System.Windows.Forms.CheckBox cbKeybEnabled;
+        private System.Windows.Forms.Button bOpenLog;
+        private System.Windows.Forms.Button bChangePassword;
+        private System.Windows.Forms.TextBox tbPass1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bDeleteLogs;
+        private System.Windows.Forms.Button bExit;
+        private System.Windows.Forms.CheckBox cbMouseEnabled;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbPass2;
+    }
+}
+
