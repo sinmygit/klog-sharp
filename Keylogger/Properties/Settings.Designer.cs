@@ -34,5 +34,17 @@ namespace Klog.Properties {
                 this["PasswordHash"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int ClickScreenshotRadius {
+            get {
+                return ((int)(this["ClickScreenshotRadius"]));
+            }
+            set {
+                this["ClickScreenshotRadius"] = value;
+            }
+        }
     }
 }

