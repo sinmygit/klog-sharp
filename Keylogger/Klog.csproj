@@ -51,7 +51,6 @@
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="KeyChord.cs" />
-    <Compile Include="ScreenShot.cs" />
     <Compile Include="SimpleKeylogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

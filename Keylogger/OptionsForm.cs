@@ -25,6 +25,10 @@ namespace Klog
 
             Directory.CreateDirectory(Path.GetDirectoryName(SimpleKeylogger.LogFileName));
 
+            // Load UI settings
+            cbKeybEnabled.Checked = Settings.Default.KeyboardLogEnabled;
+            cbMouseEnabled.Checked = Settings.Default.MouseLogEnabled;
+
             InitializeKeylogger();
             StartHooks();
         }
@@ -95,6 +99,11 @@ namespace Klog
         private void bOpenLog_Click(object sender, EventArgs e)
         {
             Process.Start(SimpleKeylogger.LogFileName);
+        }
+
+        private void bOpenLogFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.GetDirectoryName(SimpleKeylogger.LogFileName));
         }
 
         private void bDeleteLogs_Click(object sender, EventArgs e)
@@ -190,6 +199,19 @@ namespace Klog
         }
 
         #endregion
+
+        private void OnUpdateUI(object sender, EventArgs e)
+        {
+            Settings.Default.KeyboardLogEnabled = cbKeybEnabled.Checked;
+            Settings.Default.MouseLogEnabled = cbMouseEnabled.Checked;
+            Settings.Default.Save();
+        }
+
+        private void bClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
 
     }
 }

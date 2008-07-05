@@ -46,5 +46,29 @@ namespace Klog.Properties {
                 this["ClickScreenshotRadius"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeyboardLogEnabled {
+            get {
+                return ((bool)(this["KeyboardLogEnabled"]));
+            }
+            set {
+                this["KeyboardLogEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MouseLogEnabled {
+            get {
+                return ((bool)(this["MouseLogEnabled"]));
+            }
+            set {
+                this["MouseLogEnabled"] = value;
+            }
+        }
     }
 }

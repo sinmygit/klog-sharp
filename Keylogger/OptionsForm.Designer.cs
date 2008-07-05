@@ -47,7 +47,13 @@ namespace Klog
             this.bDeleteLogs = new System.Windows.Forms.Button();
             this.bExit = new System.Windows.Forms.Button();
             this.cbMouseEnabled = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bOpenLogFolder = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // trayIcon
@@ -62,20 +68,21 @@ namespace Klog
             this.cbKeybEnabled.AutoSize = true;
             this.cbKeybEnabled.Checked = true;
             this.cbKeybEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbKeybEnabled.Location = new System.Drawing.Point(12, 51);
+            this.cbKeybEnabled.Location = new System.Drawing.Point(6, 19);
             this.cbKeybEnabled.Name = "cbKeybEnabled";
             this.cbKeybEnabled.Size = new System.Drawing.Size(154, 17);
-            this.cbKeybEnabled.TabIndex = 1;
+            this.cbKeybEnabled.TabIndex = 0;
             this.cbKeybEnabled.Text = "Keyboard Logging Enabled";
             this.cbKeybEnabled.UseVisualStyleBackColor = true;
+            this.cbKeybEnabled.CheckedChanged += new System.EventHandler(this.OnUpdateUI);
             // 
             // bOpenLog
             // 
-            this.bOpenLog.Location = new System.Drawing.Point(12, 107);
+            this.bOpenLog.Location = new System.Drawing.Point(6, 19);
             this.bOpenLog.Name = "bOpenLog";
             this.bOpenLog.Size = new System.Drawing.Size(154, 25);
-            this.bOpenLog.TabIndex = 3;
-            this.bOpenLog.Text = "Open Log File";
+            this.bOpenLog.TabIndex = 0;
+            this.bOpenLog.Text = "Open Main Log File";
             this.bOpenLog.UseVisualStyleBackColor = true;
             this.bOpenLog.Click += new System.EventHandler(this.bOpenLog_Click);
             // 
@@ -104,10 +111,10 @@ namespace Klog
             this.groupBox1.Controls.Add(this.tbPass2);
             this.groupBox1.Controls.Add(this.tbPass1);
             this.groupBox1.Controls.Add(this.bChangePassword);
-            this.groupBox1.Location = new System.Drawing.Point(172, 85);
+            this.groupBox1.Location = new System.Drawing.Point(213, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(192, 103);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Change password";
             // 
@@ -139,21 +146,21 @@ namespace Klog
             // 
             // bDeleteLogs
             // 
-            this.bDeleteLogs.Location = new System.Drawing.Point(13, 164);
+            this.bDeleteLogs.Location = new System.Drawing.Point(7, 79);
             this.bDeleteLogs.Name = "bDeleteLogs";
             this.bDeleteLogs.Size = new System.Drawing.Size(153, 24);
-            this.bDeleteLogs.TabIndex = 4;
+            this.bDeleteLogs.TabIndex = 2;
             this.bDeleteLogs.Text = "Delete All Logs";
             this.bDeleteLogs.UseVisualStyleBackColor = true;
             this.bDeleteLogs.Click += new System.EventHandler(this.bDeleteLogs_Click);
             // 
             // bExit
             // 
-            this.bExit.Location = new System.Drawing.Point(12, 12);
+            this.bExit.Location = new System.Drawing.Point(12, 222);
             this.bExit.Name = "bExit";
-            this.bExit.Size = new System.Drawing.Size(154, 33);
-            this.bExit.TabIndex = 0;
-            this.bExit.Text = "Exit";
+            this.bExit.Size = new System.Drawing.Size(172, 38);
+            this.bExit.TabIndex = 3;
+            this.bExit.Text = "Quit Klog";
             this.bExit.UseVisualStyleBackColor = true;
             this.bExit.Click += new System.EventHandler(this.bExit_Click);
             // 
@@ -162,24 +169,67 @@ namespace Klog
             this.cbMouseEnabled.AutoSize = true;
             this.cbMouseEnabled.Checked = true;
             this.cbMouseEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbMouseEnabled.Location = new System.Drawing.Point(12, 74);
+            this.cbMouseEnabled.Location = new System.Drawing.Point(6, 42);
             this.cbMouseEnabled.Name = "cbMouseEnabled";
             this.cbMouseEnabled.Size = new System.Drawing.Size(141, 17);
-            this.cbMouseEnabled.TabIndex = 2;
+            this.cbMouseEnabled.TabIndex = 1;
             this.cbMouseEnabled.Text = "Mouse Logging Enabled";
             this.cbMouseEnabled.UseVisualStyleBackColor = true;
+            this.cbMouseEnabled.CheckedChanged += new System.EventHandler(this.OnUpdateUI);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbKeybEnabled);
+            this.groupBox2.Controls.Add(this.cbMouseEnabled);
+            this.groupBox2.Location = new System.Drawing.Point(12, 135);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(172, 71);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Options";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bOpenLogFolder);
+            this.groupBox3.Controls.Add(this.bOpenLog);
+            this.groupBox3.Controls.Add(this.bDeleteLogs);
+            this.groupBox3.Location = new System.Drawing.Point(12, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(172, 117);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Log Files";
+            // 
+            // bOpenLogFolder
+            // 
+            this.bOpenLogFolder.Location = new System.Drawing.Point(6, 49);
+            this.bOpenLogFolder.Name = "bOpenLogFolder";
+            this.bOpenLogFolder.Size = new System.Drawing.Size(154, 25);
+            this.bOpenLogFolder.TabIndex = 1;
+            this.bOpenLogFolder.Text = "Open Log Folder";
+            this.bOpenLogFolder.UseVisualStyleBackColor = true;
+            this.bOpenLogFolder.Click += new System.EventHandler(this.bOpenLogFolder_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(270, 222);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(135, 38);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Close Control Panel";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.bClose_Click);
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 200);
+            this.ClientSize = new System.Drawing.Size(409, 268);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.bExit);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.bDeleteLogs);
-            this.Controls.Add(this.bOpenLog);
-            this.Controls.Add(this.cbMouseEnabled);
-            this.Controls.Add(this.cbKeybEnabled);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -191,8 +241,10 @@ namespace Klog
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -210,6 +262,10 @@ namespace Klog
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbPass2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button bOpenLogFolder;
+        private System.Windows.Forms.Button button2;
     }
 }
 
