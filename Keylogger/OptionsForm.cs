@@ -115,10 +115,10 @@ namespace Klog
 
         #region Password handling
 
-        private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        public void VerifyPasswordShowControlPanel()
         {
             // Don't log our own password etc.
-            if (_hook != null) { StopHooks(); }
+            StopHooks();
 
             // If the window is already active
             bool passVerified = false;
@@ -152,6 +152,10 @@ namespace Klog
             {
                 Show();
                 Activate();
+            }
+            else
+            {
+                StartHooks();
             }
         }
 
@@ -210,6 +214,16 @@ namespace Klog
         private void bClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            VerifyPasswordShowControlPanel();
+        }
+
+        private void menuOpenControlPanel_Click(object sender, EventArgs e)
+        {
+            VerifyPasswordShowControlPanel();
         }
 
 

@@ -51,13 +51,17 @@ namespace Klog
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bOpenLogFolder = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuOpenControlPanel = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.trayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // trayIcon
             // 
+            this.trayIcon.ContextMenuStrip = this.trayContextMenu;
             this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
             this.trayIcon.Text = "Klog";
             this.trayIcon.Visible = true;
@@ -111,7 +115,7 @@ namespace Klog
             this.groupBox1.Controls.Add(this.tbPass2);
             this.groupBox1.Controls.Add(this.tbPass1);
             this.groupBox1.Controls.Add(this.bChangePassword);
-            this.groupBox1.Location = new System.Drawing.Point(213, 12);
+            this.groupBox1.Location = new System.Drawing.Point(190, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(192, 103);
             this.groupBox1.TabIndex = 2;
@@ -156,9 +160,9 @@ namespace Klog
             // 
             // bExit
             // 
-            this.bExit.Location = new System.Drawing.Point(12, 222);
+            this.bExit.Location = new System.Drawing.Point(12, 212);
             this.bExit.Name = "bExit";
-            this.bExit.Size = new System.Drawing.Size(172, 38);
+            this.bExit.Size = new System.Drawing.Size(172, 25);
             this.bExit.TabIndex = 3;
             this.bExit.Text = "Quit Klog";
             this.bExit.UseVisualStyleBackColor = true;
@@ -212,19 +216,33 @@ namespace Klog
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(270, 222);
+            this.button2.Location = new System.Drawing.Point(303, 210);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(135, 38);
+            this.button2.Size = new System.Drawing.Size(79, 25);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Close Control Panel";
+            this.button2.Text = "Close";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.bClose_Click);
+            // 
+            // trayContextMenu
+            // 
+            this.trayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuOpenControlPanel});
+            this.trayContextMenu.Name = "trayContextMenu";
+            this.trayContextMenu.Size = new System.Drawing.Size(168, 48);
+            // 
+            // menuOpenControlPanel
+            // 
+            this.menuOpenControlPanel.Name = "menuOpenControlPanel";
+            this.menuOpenControlPanel.Size = new System.Drawing.Size(167, 22);
+            this.menuOpenControlPanel.Text = "Open Control Panel";
+            this.menuOpenControlPanel.Click += new System.EventHandler(this.menuOpenControlPanel_Click);
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 268);
+            this.ClientSize = new System.Drawing.Size(393, 247);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button2);
@@ -234,7 +252,6 @@ namespace Klog
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsForm";
-            this.ShowInTaskbar = false;
             this.Text = "Klog Control Panel";
             this.Deactivate += new System.EventHandler(this.OptionsForm_Deactivate);
             this.Activated += new System.EventHandler(this.OptionsForm_Activated);
@@ -244,6 +261,7 @@ namespace Klog
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.trayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,6 +284,8 @@ namespace Klog
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button bOpenLogFolder;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ContextMenuStrip trayContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenControlPanel;
     }
 }
 
