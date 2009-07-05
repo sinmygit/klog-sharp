@@ -103,12 +103,12 @@ namespace Klog
 
         private void bOpenLogFolder_Click(object sender, EventArgs e)
         {
-            Process.Start(Path.GetDirectoryName(SimpleKeylogger.LogFileName));
+            Process.Start(SimpleKeylogger.LogPath);
         }
 
         private void bDeleteLogs_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo(Path.GetDirectoryName(SimpleKeylogger.LogFileName));
+            DirectoryInfo dir = new DirectoryInfo(SimpleKeylogger.LogPath);
             dir.Delete(true);
             dir.Create();
         }

