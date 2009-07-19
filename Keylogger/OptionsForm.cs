@@ -216,7 +216,7 @@ namespace Klog
             Close();
         }
 
-        private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void trayIcon_Click(object sender, MouseEventArgs e)
         {
             VerifyPasswordShowControlPanel();
         }

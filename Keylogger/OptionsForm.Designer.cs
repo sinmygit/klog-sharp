@@ -36,6 +36,8 @@ namespace Klog
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuOpenControlPanel = new System.Windows.Forms.ToolStripMenuItem();
             this.cbKeybEnabled = new System.Windows.Forms.CheckBox();
             this.bOpenLog = new System.Windows.Forms.Button();
             this.bChangePassword = new System.Windows.Forms.Button();
@@ -51,12 +53,10 @@ namespace Klog
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bOpenLogFolder = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuOpenControlPanel = new System.Windows.Forms.ToolStripMenuItem();
+            this.trayContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.trayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // trayIcon
@@ -65,7 +65,21 @@ namespace Klog
             this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
             this.trayIcon.Text = "Klog";
             this.trayIcon.Visible = true;
-            this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseDoubleClick);
+            this.trayIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_Click);
+            // 
+            // trayContextMenu
+            // 
+            this.trayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuOpenControlPanel});
+            this.trayContextMenu.Name = "trayContextMenu";
+            this.trayContextMenu.Size = new System.Drawing.Size(179, 26);
+            // 
+            // menuOpenControlPanel
+            // 
+            this.menuOpenControlPanel.Name = "menuOpenControlPanel";
+            this.menuOpenControlPanel.Size = new System.Drawing.Size(178, 22);
+            this.menuOpenControlPanel.Text = "Open Control Panel";
+            this.menuOpenControlPanel.Click += new System.EventHandler(this.menuOpenControlPanel_Click);
             // 
             // cbKeybEnabled
             // 
@@ -224,20 +238,6 @@ namespace Klog
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.bClose_Click);
             // 
-            // trayContextMenu
-            // 
-            this.trayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuOpenControlPanel});
-            this.trayContextMenu.Name = "trayContextMenu";
-            this.trayContextMenu.Size = new System.Drawing.Size(168, 48);
-            // 
-            // menuOpenControlPanel
-            // 
-            this.menuOpenControlPanel.Name = "menuOpenControlPanel";
-            this.menuOpenControlPanel.Size = new System.Drawing.Size(167, 22);
-            this.menuOpenControlPanel.Text = "Open Control Panel";
-            this.menuOpenControlPanel.Click += new System.EventHandler(this.menuOpenControlPanel_Click);
-            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,12 +256,12 @@ namespace Klog
             this.Deactivate += new System.EventHandler(this.OptionsForm_Deactivate);
             this.Activated += new System.EventHandler(this.OptionsForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
+            this.trayContextMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.trayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
